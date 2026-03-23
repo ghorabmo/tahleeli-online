@@ -6,19 +6,19 @@ import api from "./api";
 // Full-Stack Production-Ready React Application
 // ══════════════════════════════════════════════════════════════
 
-// ─── Design Tokens (Vezeeta-inspired, green) ───
+// ─── Design Tokens (Novantria-inspired, green) ───
 const T = {
-  navy: "#1A1F36",
+  navy: "#0F1A12",
   teal: "#0EAD69",
   tealDark: "#0C9459",
-  tealLight: "#E8F8F0",
-  accent: "#FF8C42",
-  accentDark: "#E07530",
+  tealLight: "#ECFDF5",
+  accent: "#F59E0B",
+  accentDark: "#D97706",
   coral: "#E8634A",
   white: "#FFFFFF",
-  offWhite: "#F7F8FC",
-  grey50: "#F4F6F9",
-  grey100: "#EBEEF2",
+  offWhite: "#FAFBFC",
+  grey50: "#F3F4F6",
+  grey100: "#E5E7EB",
   grey200: "#D1D5DB",
   grey300: "#9CA3AF",
   grey400: "#6B7280",
@@ -27,14 +27,17 @@ const T = {
   success: "#10B981",
   warning: "#F59E0B",
   danger: "#EF4444",
-  radius: "16px",
-  radiusSm: "12px",
-  radiusXl: "24px",
-  shadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)",
-  shadowLg: "0 4px 14px rgba(0,0,0,0.08)",
-  shadowXl: "0 10px 40px rgba(0,0,0,0.1)",
-  font: "'Poppins', 'Noto Sans Arabic', sans-serif",
-  fontAr: "'Noto Sans Arabic', 'Poppins', sans-serif",
+  green900: "#064E3B",
+  green800: "#065F46",
+  green700: "#047857",
+  radius: "12px",
+  radiusSm: "8px",
+  radiusXl: "20px",
+  shadow: "0 1px 2px rgba(0,0,0,0.05)",
+  shadowLg: "0 4px 12px rgba(0,0,0,0.07)",
+  shadowXl: "0 8px 30px rgba(0,0,0,0.1)",
+  font: "'Inter', 'Noto Sans Arabic', -apple-system, sans-serif",
+  fontAr: "'Noto Sans Arabic', 'Inter', sans-serif",
 };
 
 // ─── Mock Data ───
@@ -167,7 +170,7 @@ const StatCard = ({ icon, value, label, color = T.teal }) => (
 // ─── Global Styles ───
 const GlobalCSS = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: ${T.font}; background: ${T.offWhite}; color: ${T.dark}; -webkit-font-smoothing: antialiased; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -196,40 +199,37 @@ const GlobalCSS = () => (
 // HEADER / NAVIGATION
 // ═══════════════════════════════════════════
 const Header = ({ page, setPage, user, setUser, setShowLogin, setShowChat }) => (
-  <header style={{ background: T.white, borderBottom: `1px solid ${T.grey100}`, position: "sticky", top: 0, zIndex: 100, backdropFilter: "blur(20px)", backgroundColor: "rgba(255,255,255,0.92)" }}>
-    <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
+  <header style={{ background: T.green900, position: "sticky", top: 0, zIndex: 100 }}>
+    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
       {/* Logo */}
-      <div onClick={() => setPage("home")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
-        <div style={{ width: 40, height: 40, borderRadius: 12, background: T.teal, display: "flex", alignItems: "center", justifyContent: "center", color: T.white, fontSize: 20, fontWeight: 800 }}>T</div>
-        <div>
-          <div style={{ fontSize: 18, fontWeight: 800, color: T.navy, lineHeight: 1.1, letterSpacing: -0.5 }}>Tahleeli<span style={{ color: T.teal }}>Online</span></div>
-          <div style={{ fontSize: 9, color: T.grey300, fontWeight: 500, letterSpacing: 1.5, textTransform: "uppercase" }}>تحليلي اونلاين</div>
-        </div>
+      <div onClick={() => setPage("home")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
+        <span style={{ fontSize: 22, fontWeight: 800, color: T.white, letterSpacing: -0.5, fontFamily: T.font }}>SHIFAAK</span>
+        <span style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", fontWeight: 500, letterSpacing: 1, marginLeft: 4 }}>Health</span>
       </div>
       {/* Nav */}
-      <nav style={{ display: "flex", alignItems: "center", gap: 6 }}>
+      <nav style={{ display: "flex", alignItems: "center", gap: 4 }}>
         {[
-          { id: "home", label: "Home", icon: "🏠" },
-          { id: "search", label: "Find Tests", icon: "🔍" },
-          { id: "providers", label: "Providers", icon: "🏥" },
-          { id: "corporate", label: "Corporate", icon: "🏢" },
-          { id: "dashboard", label: "Dashboard", icon: "📊" },
+          { id: "home", label: "Home" },
+          { id: "search", label: "Find Tests" },
+          { id: "providers", label: "Providers" },
+          { id: "corporate", label: "Corporate" },
+          { id: "dashboard", label: "Dashboard" },
         ].map(n => (
-          <button key={n.id} onClick={() => setPage(n.id)} style={{ padding: "8px 14px", border: "none", background: page === n.id ? T.tealLight : "transparent", color: page === n.id ? T.teal : T.grey400, borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s", display: "flex", alignItems: "center", gap: 5 }}>
-            <span style={{ fontSize: 15 }}>{n.icon}</span>{n.label}
+          <button key={n.id} onClick={() => setPage(n.id)} style={{ padding: "8px 16px", border: "none", background: page === n.id ? "rgba(255,255,255,0.1)" : "transparent", color: page === n.id ? T.white : "rgba(255,255,255,0.6)", borderRadius: 6, fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s", letterSpacing: -0.2 }}>
+            {n.label}
           </button>
         ))}
       </nav>
       {/* Actions */}
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <button onClick={() => setShowChat(true)} style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${T.grey200}`, background: T.white, cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }} title="AI Assistant">🤖</button>
+      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <button onClick={() => setShowChat(true)} style={{ width: 36, height: 36, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.2)", background: "transparent", cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: T.white }} title="AI Assistant">🤖</button>
         {user ? (
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 36, height: 36, borderRadius: "50%", background: T.teal, display: "flex", alignItems: "center", justifyContent: "center", color: T.white, fontSize: 14, fontWeight: 700 }}>{user.name[0]}</div>
-            <button onClick={() => setUser(null)} style={{ border: "none", background: "none", color: T.grey400, fontSize: 12, cursor: "pointer", fontFamily: T.font }}>Logout</button>
+            <div style={{ width: 32, height: 32, borderRadius: "50%", background: T.teal, display: "flex", alignItems: "center", justifyContent: "center", color: T.white, fontSize: 13, fontWeight: 600 }}>{user.name[0]}</div>
+            <button onClick={() => setUser(null)} style={{ border: "none", background: "none", color: "rgba(255,255,255,0.5)", fontSize: 13, cursor: "pointer", fontFamily: T.font }}>Logout</button>
           </div>
         ) : (
-          <Btn onClick={() => setShowLogin(true)} size="sm">Sign In</Btn>
+          <button onClick={() => setShowLogin(true)} style={{ padding: "8px 20px", border: "1px solid rgba(255,255,255,0.25)", background: "transparent", color: T.white, borderRadius: 6, fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s" }}>Sign In</button>
         )}
       </div>
     </div>
@@ -361,32 +361,31 @@ const HomePage = ({ setPage, setSearchQuery }) => {
         </div>
       )}
       {/* Hero */}
-      <section style={{ background: `linear-gradient(160deg, #0F2B3C 0%, #143A4F 50%, ${T.tealDark} 100%)`, padding: "80px 24px 100px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: -100, right: -100, width: 400, height: 400, borderRadius: "50%", background: `radial-gradient(circle, ${T.teal}15, transparent)` }} />
-        <div style={{ position: "absolute", bottom: -80, left: -80, width: 300, height: 300, borderRadius: "50%", background: `radial-gradient(circle, ${T.accent}10, transparent)` }} />
-        <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative" }}>
-          <div className="stagger-1" style={{ display: "inline-block", padding: "6px 16px", borderRadius: 30, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", color: T.teal, fontSize: 13, fontWeight: 600, marginBottom: 24 }}>
+      <section style={{ background: `linear-gradient(180deg, ${T.green900} 0%, ${T.green800} 40%, ${T.green700} 100%)`, padding: "80px 32px 110px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: 0, right: 0, width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, rgba(14,173,105,0.15), transparent)", transform: "translate(30%, -30%)" }} />
+        <div style={{ position: "absolute", bottom: 0, left: 0, width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(255,255,255,0.03), transparent)", transform: "translate(-30%, 30%)" }} />
+        <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center", position: "relative" }}>
+          <p className="stagger-1" style={{ fontSize: 14, color: "rgba(255,255,255,0.55)", fontWeight: 500, marginBottom: 20, letterSpacing: 0.5 }}>
             🇪🇬 Egypt's #1 Medical Testing & Radiology Platform
-          </div>
-          <h1 className="stagger-2" style={{ fontSize: 52, fontWeight: 900, color: T.white, lineHeight: 1.1, marginBottom: 20, letterSpacing: -1.5 }}>
-            Book Lab Tests & Scans<br />
-            <span style={{ color: T.teal }}>At the Best Price</span>
+          </p>
+          <h1 className="stagger-2" style={{ fontSize: 50, fontWeight: 800, color: T.white, lineHeight: 1.15, marginBottom: 24, letterSpacing: -1.5 }}>
+            Book Lab Tests & Scans<br />At the Best Price.
           </h1>
-          <p className="stagger-3" style={{ fontSize: 18, color: "rgba(255,255,255,0.65)", maxWidth: 560, margin: "0 auto 36px", lineHeight: 1.6 }}>
+          <p className="stagger-3" style={{ fontSize: 17, color: "rgba(255,255,255,0.6)", maxWidth: 500, margin: "0 auto 44px", lineHeight: 1.7, fontWeight: 400 }}>
             Compare 600+ labs & imaging centers. Book instantly. Get digital results. Save up to 40%.
           </p>
           {/* Search Bar */}
-          <div className="stagger-4" style={{ display: "flex", maxWidth: 640, margin: "0 auto", background: T.white, borderRadius: 50, overflow: "hidden", boxShadow: T.shadowXl }}>
+          <div className="stagger-4" style={{ display: "flex", maxWidth: 580, margin: "0 auto", background: T.white, borderRadius: 8, overflow: "hidden", boxShadow: "0 12px 40px rgba(0,0,0,0.2)" }}>
             <div style={{ flex: 1, position: "relative" }}>
-              <span style={{ position: "absolute", left: 22, top: "50%", transform: "translateY(-50%)", fontSize: 18 }}>🔍</span>
-              <input value={heroSearch} onChange={e => setHeroSearch(e.target.value)} placeholder="Search tests, scans, or health packages..." style={{ width: "100%", padding: "20px 20px 20px 52px", border: "none", fontSize: 16, fontFamily: T.font, outline: "none" }} onKeyDown={e => { if (e.key === "Enter") { setSearchQuery(heroSearch); setPage("search"); } }} />
+              <span style={{ position: "absolute", left: 18, top: "50%", transform: "translateY(-50%)", fontSize: 16, color: T.grey300 }}>🔍</span>
+              <input value={heroSearch} onChange={e => setHeroSearch(e.target.value)} placeholder="Search tests, scans, or health packages..." style={{ width: "100%", padding: "18px 16px 18px 48px", border: "none", fontSize: 15, fontFamily: T.font, outline: "none", color: T.dark }} onKeyDown={e => { if (e.key === "Enter") { setSearchQuery(heroSearch); setPage("search"); } }} />
             </div>
-            <button onClick={() => { setSearchQuery(heroSearch); setPage("search"); }} style={{ padding: "0 36px", background: T.teal, border: "none", color: T.white, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: T.font, borderRadius: "0 50px 50px 0", margin: -1 }}>Search</button>
+            <button onClick={() => { setSearchQuery(heroSearch); setPage("search"); }} style={{ padding: "0 28px", background: T.teal, border: "none", color: T.white, fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: T.font }}>Search</button>
           </div>
           {/* Quick Links */}
-          <div className="stagger-5" style={{ display: "flex", justifyContent: "center", gap: 12, marginTop: 24, flexWrap: "wrap" }}>
+          <div className="stagger-5" style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 28, flexWrap: "wrap" }}>
             {["CBC Blood Test", "MRI Scan", "Thyroid Panel", "Health Package"].map(q => (
-              <button key={q} onClick={() => { setSearchQuery(q); setPage("search"); }} style={{ padding: "8px 18px", borderRadius: 30, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", fontSize: 13, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s" }}>
+              <button key={q} onClick={() => { setSearchQuery(q); setPage("search"); }} style={{ padding: "7px 16px", borderRadius: 6, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", fontSize: 13, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s", fontWeight: 400 }}>
                 {q}
               </button>
             ))}
@@ -395,26 +394,28 @@ const HomePage = ({ setPage, setSearchQuery }) => {
       </section>
 
       {/* Stats Bar */}
-      <section style={{ maxWidth: 1100, margin: "-50px auto 0", padding: "0 24px", position: "relative", zIndex: 10 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, background: T.white, borderRadius: T.radiusXl, padding: 24, boxShadow: T.shadowLg }}>
+      <section style={{ maxWidth: 1100, margin: "-48px auto 0", padding: "0 32px", position: "relative", zIndex: 10 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", background: T.white, borderRadius: T.radius, boxShadow: T.shadowXl, overflow: "hidden" }}>
           {[
-            { num: "600+", label: "Partner Labs & Centers", icon: "🏥" },
-            { num: "1,200+", label: "Available Tests & Scans", icon: "🧪" },
-            { num: "250K+", label: "Patients Served", icon: "👥" },
-            { num: "4.8★", label: "Average Rating", icon: "⭐" },
+            { num: "600+", label: "Partner Labs & Centers" },
+            { num: "1,200+", label: "Available Tests & Scans" },
+            { num: "250K+", label: "Patients Served" },
+            { num: "4.8★", label: "Average Rating" },
           ].map((s, i) => (
-            <div key={i} style={{ textAlign: "center", padding: "8px 0" }}>
-              <div style={{ fontSize: 24, fontWeight: 800, color: T.navy }}>{s.num}</div>
-              <div style={{ fontSize: 12, color: T.grey400, fontWeight: 500, marginTop: 2 }}>{s.label}</div>
+            <div key={i} style={{ textAlign: "center", padding: "28px 16px", borderRight: i < 3 ? `1px solid ${T.grey100}` : "none" }}>
+              <div style={{ fontSize: 26, fontWeight: 800, color: T.dark, letterSpacing: -0.5 }}>{s.num}</div>
+              <div style={{ fontSize: 12, color: T.grey400, fontWeight: 400, marginTop: 4 }}>{s.label}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Categories */}
-      <section style={{ maxWidth: 1100, margin: "60px auto", padding: "0 24px" }}>
-        <h2 style={{ fontSize: 28, fontWeight: 800, color: T.navy, marginBottom: 8 }}>Browse by Category</h2>
-        <p style={{ color: T.grey400, marginBottom: 28, fontSize: 15 }}>Find the right test or scan across all our partner providers</p>
+      <section style={{ maxWidth: 1100, margin: "72px auto", padding: "0 32px" }}>
+        <div style={{ marginBottom: 36 }}>
+          <h2 style={{ fontSize: 32, fontWeight: 800, color: T.dark, marginBottom: 8, letterSpacing: -0.5 }}>Browse by Category</h2>
+          <p style={{ color: T.grey400, fontSize: 15, fontWeight: 400 }}>Find the right test or scan across all our partner providers</p>
+        </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
           {CATEGORIES.map((cat, i) => (
             <div key={cat.id} className="hover-lift" onClick={() => { setSearchQuery(cat.name); setPage("search"); }} style={{ background: T.white, borderRadius: T.radius, padding: 24, cursor: "pointer", boxShadow: T.shadow, animation: `fadeUp 0.5s ${i * 0.05}s both` }}>
@@ -428,10 +429,10 @@ const HomePage = ({ setPage, setSearchQuery }) => {
       </section>
 
       {/* How It Works */}
-      <section style={{ background: T.grey50, padding: "64px 24px" }}>
+      <section style={{ background: T.grey50, padding: "72px 32px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <h2 style={{ fontSize: 28, fontWeight: 800, color: T.navy, textAlign: "center", marginBottom: 8 }}>How It Works</h2>
-          <p style={{ color: T.grey400, textAlign: "center", marginBottom: 48, fontSize: 15 }}>Book your medical test in 3 simple steps</p>
+          <h2 style={{ fontSize: 32, fontWeight: 800, color: T.dark, textAlign: "center", marginBottom: 8, letterSpacing: -0.5 }}>How It Works</h2>
+          <p style={{ color: T.grey400, textAlign: "center", marginBottom: 56, fontSize: 15 }}>Book your medical test in 3 simple steps</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
             {[
               { step: "01", icon: "📋", title: "Search & Compare", desc: "Upload your prescription or search by test name. Compare prices, locations, and ratings across 600+ providers." },
@@ -450,10 +451,10 @@ const HomePage = ({ setPage, setSearchQuery }) => {
       </section>
 
       {/* Popular Tests */}
-      <section style={{ maxWidth: 1100, margin: "60px auto", padding: "0 24px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
+      <section style={{ maxWidth: 1100, margin: "72px auto", padding: "0 32px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
           <div>
-            <h2 style={{ fontSize: 28, fontWeight: 800, color: T.navy, marginBottom: 4 }}>Most Popular Tests</h2>
+            <h2 style={{ fontSize: 32, fontWeight: 800, color: T.dark, marginBottom: 4, letterSpacing: -0.5 }}>Most Popular Tests</h2>
             <p style={{ color: T.grey400, fontSize: 15 }}>Frequently booked across Egypt</p>
           </div>
           <Btn variant="ghost" onClick={() => setPage("search")}>View All →</Btn>
@@ -480,23 +481,23 @@ const HomePage = ({ setPage, setSearchQuery }) => {
       </section>
 
       {/* Prescription Upload CTA */}
-      <section style={{ maxWidth: 1100, margin: "60px auto", padding: "0 24px" }}>
-        <div style={{ background: T.teal, borderRadius: T.radiusXl, padding: "48px 56px", display: "flex", alignItems: "center", gap: 48, position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", right: -60, top: -60, width: 200, height: 200, borderRadius: "50%", background: "rgba(255,255,255,0.08)" }} />
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.7)", fontWeight: 600, letterSpacing: 2, marginBottom: 12 }}>AI-POWERED</div>
-            <h3 style={{ fontSize: 28, fontWeight: 800, color: T.white, marginBottom: 12 }}>Upload Your Prescription</h3>
-            <p style={{ fontSize: 15, color: "rgba(255,255,255,0.75)", lineHeight: 1.6, marginBottom: 24 }}>Take a photo of your doctor's prescription. Our AI reads it, identifies the required tests, and finds the best prices across all providers. It's that simple.</p>
-            <button onClick={() => setRxModal(true)} style={{ padding: "14px 32px", border: "none", borderRadius: 50, background: T.white, color: T.teal, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: T.font }}>📸 Upload Prescription</button>
+      <section style={{ maxWidth: 1100, margin: "72px auto", padding: "0 32px" }}>
+        <div style={{ background: T.green900, borderRadius: T.radiusXl, padding: "56px 56px", display: "flex", alignItems: "center", gap: 48, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", right: -80, top: -80, width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, rgba(14,173,105,0.2), transparent)" }} />
+          <div style={{ flex: 1, position: "relative" }}>
+            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", fontWeight: 500, letterSpacing: 2, marginBottom: 16, textTransform: "uppercase" }}>AI-Powered</p>
+            <h3 style={{ fontSize: 30, fontWeight: 800, color: T.white, marginBottom: 14, letterSpacing: -0.5 }}>Upload Your Prescription</h3>
+            <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, marginBottom: 28 }}>Take a photo of your doctor's prescription. Our AI reads it, identifies the required tests, and finds the best prices across all providers.</p>
+            <button onClick={() => setRxModal(true)} style={{ padding: "14px 28px", border: "none", borderRadius: 8, background: T.teal, color: T.white, fontSize: 15, fontWeight: 600, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s" }}>📸 Upload Prescription</button>
           </div>
-          <div style={{ width: 180, height: 180, borderRadius: T.radiusXl, background: "rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 80, flexShrink: 0 }}>📄</div>
+          <div style={{ width: 180, height: 180, borderRadius: T.radius, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 72, flexShrink: 0 }}>📄</div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section style={{ background: T.grey50, padding: "64px 24px" }}>
+      <section style={{ background: T.grey50, padding: "72px 32px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <h2 style={{ fontSize: 28, fontWeight: 800, color: T.navy, textAlign: "center", marginBottom: 36 }}>What Patients Say</h2>
+          <h2 style={{ fontSize: 32, fontWeight: 800, color: T.dark, textAlign: "center", marginBottom: 40, letterSpacing: -0.5 }}>What Patients Say</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
             {REVIEWS.map((r, i) => (
               <div key={i} style={{ background: T.white, borderRadius: T.radius, padding: 24, boxShadow: T.shadow }}>
@@ -513,10 +514,10 @@ const HomePage = ({ setPage, setSearchQuery }) => {
       </section>
 
       {/* Footer */}
-      <footer style={{ background: T.navy, padding: "48px 24px 32px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 40 }}>
+      <footer style={{ background: T.green900, padding: "56px 32px 36px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48 }}>
           <div>
-            <div style={{ fontSize: 22, fontWeight: 800, color: T.white, marginBottom: 12 }}>Tahleeli<span style={{ color: T.teal }}>Online</span></div>
+            <div style={{ fontSize: 20, fontWeight: 800, color: T.white, marginBottom: 14, letterSpacing: -0.3 }}>SHIFAAK<span style={{ fontWeight: 400, fontSize: 14, marginLeft: 6, color: "rgba(255,255,255,0.4)" }}>Health</span></div>
             <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", lineHeight: 1.6, marginBottom: 16 }}>Egypt's leading digital platform for medical testing and radiology booking. Compare, book, and get results — all digital.</p>
             <div style={{ display: "flex", gap: 12 }}>
               {["📘", "📸", "🐦", "💬"].map((s, i) => (
@@ -793,8 +794,8 @@ const CorporatePage = () => {
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 24px" }}>
       {/* Hero */}
-      <div style={{ background: T.teal, borderRadius: T.radiusXl, padding: "56px 56px", marginBottom: 40, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", right: -40, bottom: -40, width: 200, height: 200, borderRadius: "50%", background: "rgba(255,255,255,0.08)" }} />
+      <div style={{ background: `linear-gradient(135deg, ${T.green900}, ${T.green800})`, borderRadius: T.radiusXl, padding: "56px 56px", marginBottom: 40, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", right: -40, bottom: -40, width: 200, height: 200, borderRadius: "50%", background: "rgba(14,173,105,0.15)" }} />
         <div style={{ maxWidth: 600 }}>
           <div style={{ fontSize: 11, color: "rgba(255,255,255,0.7)", fontWeight: 700, letterSpacing: 2, marginBottom: 12 }}>B2B CORPORATE WELLNESS</div>
           <h1 style={{ fontSize: 36, fontWeight: 900, color: T.white, marginBottom: 16, lineHeight: 1.2 }}>Health Screening for Your Team, Made Simple</h1>
@@ -1129,7 +1130,7 @@ const ChatBot = ({ open, onClose }) => {
   if (!open) return null;
   return (
     <div style={{ position: "fixed", bottom: 24, right: 24, width: 380, height: 520, background: T.white, borderRadius: T.radiusXl, boxShadow: T.shadowXl, display: "flex", flexDirection: "column", zIndex: 999, animation: "fadeUp 0.3s", overflow: "hidden" }}>
-      <div style={{ background: T.teal, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div style={{ background: T.green900, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>🤖</div>
           <div>
@@ -1240,7 +1241,7 @@ export default function App() {
 
       {/* Floating Chat Button */}
       {!showChat && (
-        <button onClick={() => setShowChat(true)} style={{ position: "fixed", bottom: 24, right: 24, width: 60, height: 60, borderRadius: "50%", background: T.teal, border: "none", color: T.white, fontSize: 28, cursor: "pointer", boxShadow: "0 4px 20px rgba(14,173,105,0.3)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 998, transition: "transform 0.2s" }}>
+        <button onClick={() => setShowChat(true)} style={{ position: "fixed", bottom: 24, right: 24, width: 56, height: 56, borderRadius: "50%", background: T.green900, border: "none", color: T.white, fontSize: 24, cursor: "pointer", boxShadow: "0 4px 20px rgba(6,78,59,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 998, transition: "transform 0.2s" }}>
           💬
         </button>
       )}
