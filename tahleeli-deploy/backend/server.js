@@ -54,13 +54,30 @@ app.use((req, res, next) => {
 app.use('/api', routes);
 
 // ── Serve Frontend (production) ──
+const fs = require('fs');
 const frontendPath = path.join(__dirname, '..', 'frontend', 'build');
-app.use(express.static(frontendPath));
-app.get('*', (req, res) => {
-  if (!req.path.startsWith('/api')) {
-    res.sendFile(path.join(frontendPath, 'index.html'));
-  }
-});
+if (fs.existsSync(frontendPath)) {
+  app.use(express.static(frontendPath));
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(frontendPath, 'index.html'));
+    }
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.json({
+      platform: 'TahleeliOnline API',
+      status: 'running',
+      docs: {
+        health: '/api/health',
+        tests: '/api/tests',
+        providers: '/api/providers',
+        categories: '/api/categories',
+        search: '/api/search?q=blood'
+      }
+    });
+  });
+}
 
 // ── Error Handler ──
 app.use((err, req, res, next) => {
