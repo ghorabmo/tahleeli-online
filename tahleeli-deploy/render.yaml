@@ -1,0 +1,19 @@
+# ═══════════════════════════════════════════════════════════
+# RENDER BLUEPRINT — One-click deploy for TahleeliOnline
+# ═══════════════════════════════════════════════════════════
+services:
+  - type: web
+    name: tahleeli-api
+    runtime: node
+    region: frankfurt
+    plan: free
+    buildCommand: cd backend && npm install && node seed.js
+    startCommand: cd backend && node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: JWT_SECRET
+        generateValue: true
