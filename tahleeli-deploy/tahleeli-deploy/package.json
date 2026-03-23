@@ -1,0 +1,11 @@
+{
+  "name": "tahleeli-online",
+  "version": "1.0.0",
+  "description": "TahleeliOnline — Egypt Medical Testing & Radiology Platform",
+  "scripts": {
+    "start": "cd backend && node server.js",
+    "build": "cd backend && npm install && node seed.js",
+    "test": "cd backend && node run_tests.js",
+    "seed": "cd backend && node seed.js"
+  }
+}
