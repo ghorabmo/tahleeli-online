@@ -371,7 +371,7 @@ const HomePage = ({ setPage, setSearchQuery }) => {
             <div style={{ fontSize: 11, color: T.accent, fontWeight: 700, letterSpacing: 2, marginBottom: 12 }}>AI-POWERED</div>
             <h3 style={{ fontSize: 28, fontWeight: 800, color: T.white, marginBottom: 12 }}>Upload Your Prescription</h3>
             <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 24 }}>Take a photo of your doctor's prescription. Our AI reads it, identifies the required tests, and finds the best prices across all providers. It's that simple.</p>
-            <Btn variant="accent" size="lg">📸 Upload Prescription</Btn>
+            <Btn variant="accent" size="lg" onClick={() => { const text = prompt("📋 Type or paste your prescription text:\n\nExamples:\n• CBC, thyroid, sugar test\n• صورة دم كاملة وسكر تراكمي\n• MRI brain with contrast"); if (text) { alert("✅ Detected tests from your prescription:\\n\\n" + text + "\\n\\nGo to Find Tests page to book these tests at the best price!"); }}}>📸 Upload Prescription</Btn>
           </div>
           <div style={{ width: 200, height: 200, borderRadius: T.radiusXl, background: `linear-gradient(135deg, ${T.teal}30, ${T.accent}20)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 80, flexShrink: 0 }}>📄</div>
         </div>
