@@ -177,37 +177,61 @@ const GlobalCSS = () => (
     ::-webkit-scrollbar-thumb { background: ${T.grey200}; border-radius: 10px; }
     ::placeholder { color: ${T.grey300}; }
     input:focus, select:focus { outline: none; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: calc(200px + 100%) 0; } }
-    .hover-lift { transition: transform 0.25s, box-shadow 0.25s; }
-    .hover-lift:hover { transform: translateY(-4px); box-shadow: ${T.shadowLg}; }
-    .stagger-1 { animation: fadeUp 0.5s 0.1s both; }
-    .stagger-2 { animation: fadeUp 0.5s 0.2s both; }
-    .stagger-3 { animation: fadeUp 0.5s 0.3s both; }
-    .stagger-4 { animation: fadeUp 0.5s 0.4s both; }
-    .stagger-5 { animation: fadeUp 0.5s 0.5s both; }
-    select { padding: 12px 16px; border: 1.5px solid ${T.grey200}; border-radius: ${T.radiusSm}; font-size: 14px; font-family: ${T.font}; background: ${T.white}; color: ${T.dark}; cursor: pointer; }
+    @keyframes drawPulse { from { stroke-dashoffset: 300; } to { stroke-dashoffset: 0; } }
+    @keyframes logoPulseGlow { 0%, 100% { filter: drop-shadow(0 0 0px rgba(14,173,105,0)); } 50% { filter: drop-shadow(0 0 6px rgba(14,173,105,0.4)); } }
+    @keyframes heroGlow { 0%, 100% { opacity: 0.12; transform: scale(1); } 50% { opacity: 0.2; transform: scale(1.05); } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    .hover-lift { transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .hover-lift:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0,0,0,0.1); }
+    .stagger-1 { animation: slideUp 0.7s 0.1s cubic-bezier(0.16,1,0.3,1) both; }
+    .stagger-2 { animation: slideUp 0.7s 0.25s cubic-bezier(0.16,1,0.3,1) both; }
+    .stagger-3 { animation: slideUp 0.7s 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+    .stagger-4 { animation: slideUp 0.7s 0.55s cubic-bezier(0.16,1,0.3,1) both; }
+    .stagger-5 { animation: slideUp 0.7s 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+    .logo-icon { transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .logo-icon:hover { transform: scale(1.08); }
+    .logo-icon:hover .pulse-line { animation: logoPulseGlow 1.5s ease-in-out infinite; }
+    .nav-btn { transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+    .nav-btn:hover { background: rgba(255,255,255,0.12) !important; color: white !important; }
+    .card-enter { animation: scaleIn 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+    select { padding: 12px 16px; border: 1.5px solid ${T.grey200}; border-radius: ${T.radiusSm}; font-size: 14px; font-family: ${T.font}; background: ${T.white}; color: ${T.dark}; cursor: pointer; transition: border-color 0.2s; }
+    select:hover { border-color: ${T.teal}; }
+    button { transition: all 0.2s cubic-bezier(0.4,0,0.2,1); }
+    button:active { transform: scale(0.97); }
   `}</style>
 );
 
 // ═══════════════════════════════════════════
 // HEADER / NAVIGATION
 // ═══════════════════════════════════════════
+const PulseLogo = ({ size = 36, dark = false }) => (
+  <svg className="logo-icon" width={size} height={size} viewBox="0 0 200 200" style={{ display: "block" }}>
+    <circle cx="100" cy="100" r="96" fill={dark ? "#0EAD69" : "#0EAD69"}/>
+    <path className="pulse-line" d="M30 104 L52 104 L66 52 L80 148 L94 72 L108 120 L118 104 L170 104" fill="none" stroke={dark ? "#064E3B" : "#064E3B"} strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" style={{ strokeDasharray: 300, animation: "drawPulse 1.2s cubic-bezier(0.65,0,0.35,1) forwards" }}/>
+  </svg>
+);
+
 const Header = ({ page, setPage, user, setUser, setShowLogin, setShowChat }) => (
   <header style={{ background: T.green900, position: "sticky", top: 0, zIndex: 100 }}>
     <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
       {/* Logo */}
-      <div onClick={() => setPage("home")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
-        <span style={{ fontSize: 22, fontWeight: 800, color: T.white, letterSpacing: -0.5, fontFamily: T.font }}>SHIFAAK</span>
-        <span style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", fontWeight: 500, letterSpacing: 1, marginLeft: 4 }}>Health</span>
+      <div onClick={() => setPage("home")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
+        <PulseLogo size={36} />
+        <div>
+          <span style={{ fontSize: 20, fontWeight: 800, color: T.white, letterSpacing: -0.5, fontFamily: T.font }}>SHIFAAK</span>
+          <span style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", fontWeight: 500, letterSpacing: 2, marginLeft: 6, textTransform: "uppercase" }}>Health</span>
+        </div>
       </div>
       {/* Nav */}
-      <nav style={{ display: "flex", alignItems: "center", gap: 4 }}>
+      <nav style={{ display: "flex", alignItems: "center", gap: 2 }}>
         {[
           { id: "home", label: "Home" },
           { id: "search", label: "Find Tests" },
@@ -215,21 +239,21 @@ const Header = ({ page, setPage, user, setUser, setShowLogin, setShowChat }) => 
           { id: "corporate", label: "Corporate" },
           { id: "dashboard", label: "Dashboard" },
         ].map(n => (
-          <button key={n.id} onClick={() => setPage(n.id)} style={{ padding: "8px 16px", border: "none", background: page === n.id ? "rgba(255,255,255,0.1)" : "transparent", color: page === n.id ? T.white : "rgba(255,255,255,0.6)", borderRadius: 6, fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s", letterSpacing: -0.2 }}>
+          <button key={n.id} className="nav-btn" onClick={() => setPage(n.id)} style={{ padding: "8px 16px", border: "none", background: page === n.id ? "rgba(255,255,255,0.1)" : "transparent", color: page === n.id ? T.white : "rgba(255,255,255,0.55)", borderRadius: 6, fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: T.font, letterSpacing: -0.2 }}>
             {n.label}
           </button>
         ))}
       </nav>
       {/* Actions */}
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <button onClick={() => setShowChat(true)} style={{ width: 36, height: 36, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.2)", background: "transparent", cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: T.white }} title="AI Assistant">🤖</button>
+        <button onClick={() => setShowChat(true)} style={{ width: 36, height: 36, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.15)", background: "transparent", cursor: "pointer", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", color: T.white }} title="AI Assistant">🤖</button>
         {user ? (
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{ width: 32, height: 32, borderRadius: "50%", background: T.teal, display: "flex", alignItems: "center", justifyContent: "center", color: T.white, fontSize: 13, fontWeight: 600 }}>{user.name[0]}</div>
             <button onClick={() => setUser(null)} style={{ border: "none", background: "none", color: "rgba(255,255,255,0.5)", fontSize: 13, cursor: "pointer", fontFamily: T.font }}>Logout</button>
           </div>
         ) : (
-          <button onClick={() => setShowLogin(true)} style={{ padding: "8px 20px", border: "1px solid rgba(255,255,255,0.25)", background: "transparent", color: T.white, borderRadius: 6, fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s" }}>Sign In</button>
+          <button onClick={() => setShowLogin(true)} style={{ padding: "8px 20px", border: "1px solid rgba(255,255,255,0.2)", background: "transparent", color: T.white, borderRadius: 6, fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: T.font }}>Sign In</button>
         )}
       </div>
     </div>
@@ -362,20 +386,29 @@ const HomePage = ({ setPage, setSearchQuery }) => {
       )}
       {/* Hero */}
       <section style={{ background: `linear-gradient(180deg, ${T.green900} 0%, ${T.green800} 40%, ${T.green700} 100%)`, padding: "80px 32px 110px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: 0, right: 0, width: 600, height: 600, borderRadius: "50%", background: "radial-gradient(circle, rgba(14,173,105,0.15), transparent)", transform: "translate(30%, -30%)" }} />
-        <div style={{ position: "absolute", bottom: 0, left: 0, width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(255,255,255,0.03), transparent)", transform: "translate(-30%, 30%)" }} />
+        {/* Animated glow orbs */}
+        <div style={{ position: "absolute", top: -100, right: -100, width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(14,173,105,0.18), transparent)", animation: "heroGlow 6s ease-in-out infinite" }} />
+        <div style={{ position: "absolute", bottom: -120, left: -120, width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(255,255,255,0.04), transparent)", animation: "heroGlow 8s ease-in-out infinite 2s" }} />
+        <div style={{ position: "absolute", top: "50%", left: "50%", width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, rgba(14,173,105,0.06), transparent)", transform: "translate(-50%, -50%)", animation: "heroGlow 5s ease-in-out infinite 1s" }} />
         <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center", position: "relative" }}>
-          <p className="stagger-1" style={{ fontSize: 14, color: "rgba(255,255,255,0.55)", fontWeight: 500, marginBottom: 20, letterSpacing: 0.5 }}>
-            🇪🇬 Egypt's #1 Medical Testing & Radiology Platform
+          {/* Animated Logo in Hero */}
+          <div className="stagger-1" style={{ marginBottom: 28 }}>
+            <svg width="72" height="72" viewBox="0 0 200 200" style={{ display: "inline-block" }}>
+              <circle cx="100" cy="100" r="96" fill="rgba(255,255,255,0.08)"/>
+              <path d="M30 104 L52 104 L66 52 L80 148 L94 72 L108 120 L118 104 L170 104" fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" style={{ strokeDasharray: 300, animation: "drawPulse 1.5s 0.5s cubic-bezier(0.65,0,0.35,1) forwards", strokeDashoffset: 300 }}/>
+            </svg>
+          </div>
+          <p className="stagger-2" style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", fontWeight: 500, marginBottom: 20, letterSpacing: 0.5 }}>
+            Egypt's #1 Medical Testing & Radiology Platform
           </p>
-          <h1 className="stagger-2" style={{ fontSize: 50, fontWeight: 800, color: T.white, lineHeight: 1.15, marginBottom: 24, letterSpacing: -1.5 }}>
+          <h1 className="stagger-3" style={{ fontSize: 50, fontWeight: 800, color: T.white, lineHeight: 1.15, marginBottom: 24, letterSpacing: -1.5 }}>
             Book Lab Tests & Scans<br />At the Best Price.
           </h1>
-          <p className="stagger-3" style={{ fontSize: 17, color: "rgba(255,255,255,0.6)", maxWidth: 500, margin: "0 auto 44px", lineHeight: 1.7, fontWeight: 400 }}>
+          <p className="stagger-4" style={{ fontSize: 17, color: "rgba(255,255,255,0.6)", maxWidth: 500, margin: "0 auto 44px", lineHeight: 1.7, fontWeight: 400 }}>
             Compare 600+ labs & imaging centers. Book instantly. Get digital results. Save up to 40%.
           </p>
           {/* Search Bar */}
-          <div className="stagger-4" style={{ display: "flex", maxWidth: 580, margin: "0 auto", background: T.white, borderRadius: 8, overflow: "hidden", boxShadow: "0 12px 40px rgba(0,0,0,0.2)" }}>
+          <div className="stagger-5" style={{ display: "flex", maxWidth: 580, margin: "0 auto", background: T.white, borderRadius: 8, overflow: "hidden", boxShadow: "0 12px 40px rgba(0,0,0,0.2)" }}>
             <div style={{ flex: 1, position: "relative" }}>
               <span style={{ position: "absolute", left: 18, top: "50%", transform: "translateY(-50%)", fontSize: 16, color: T.grey300 }}>🔍</span>
               <input value={heroSearch} onChange={e => setHeroSearch(e.target.value)} placeholder="Search tests, scans, or health packages..." style={{ width: "100%", padding: "18px 16px 18px 48px", border: "none", fontSize: 15, fontFamily: T.font, outline: "none", color: T.dark }} onKeyDown={e => { if (e.key === "Enter") { setSearchQuery(heroSearch); setPage("search"); } }} />
@@ -383,9 +416,9 @@ const HomePage = ({ setPage, setSearchQuery }) => {
             <button onClick={() => { setSearchQuery(heroSearch); setPage("search"); }} style={{ padding: "0 28px", background: T.teal, border: "none", color: T.white, fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: T.font }}>Search</button>
           </div>
           {/* Quick Links */}
-          <div className="stagger-5" style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 28, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 28, flexWrap: "wrap", animation: "fadeIn 1s 1s both" }}>
             {["CBC Blood Test", "MRI Scan", "Thyroid Panel", "Health Package"].map(q => (
-              <button key={q} onClick={() => { setSearchQuery(q); setPage("search"); }} style={{ padding: "7px 16px", borderRadius: 6, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", fontSize: 13, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s", fontWeight: 400 }}>
+              <button key={q} onClick={() => { setSearchQuery(q); setPage("search"); }} style={{ padding: "7px 16px", borderRadius: 6, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", fontSize: 13, cursor: "pointer", fontFamily: T.font, fontWeight: 400 }}>
                 {q}
               </button>
             ))}
@@ -517,7 +550,11 @@ const HomePage = ({ setPage, setSearchQuery }) => {
       <footer style={{ background: T.green900, padding: "56px 32px 36px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48 }}>
           <div>
-            <div style={{ fontSize: 20, fontWeight: 800, color: T.white, marginBottom: 14, letterSpacing: -0.3 }}>SHIFAAK<span style={{ fontWeight: 400, fontSize: 14, marginLeft: 6, color: "rgba(255,255,255,0.4)" }}>Health</span></div>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+              <PulseLogo size={32} dark />
+              <span style={{ fontSize: 18, fontWeight: 800, color: T.white, letterSpacing: -0.3 }}>SHIFAAK</span>
+              <span style={{ fontSize: 10, color: "rgba(255,255,255,0.35)", fontWeight: 500, letterSpacing: 2 }}>HEALTH</span>
+            </div>
             <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", lineHeight: 1.6, marginBottom: 16 }}>Egypt's leading digital platform for medical testing and radiology booking. Compare, book, and get results — all digital.</p>
             <div style={{ display: "flex", gap: 12 }}>
               {["📘", "📸", "🐦", "💬"].map((s, i) => (
