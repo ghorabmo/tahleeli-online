@@ -6,35 +6,35 @@ import api from "./api";
 // Full-Stack Production-Ready React Application
 // ══════════════════════════════════════════════════════════════
 
-// ─── Design Tokens ───
+// ─── Design Tokens (Vezeeta-inspired, green) ───
 const T = {
-  navy: "#0F2B3C",
-  teal: "#0A9B8E",
-  tealDark: "#078578",
-  tealLight: "#E6F7F5",
-  accent: "#F5A623",
-  accentDark: "#D4891A",
+  navy: "#1A1F36",
+  teal: "#0EAD69",
+  tealDark: "#0C9459",
+  tealLight: "#E8F8F0",
+  accent: "#FF8C42",
+  accentDark: "#E07530",
   coral: "#E8634A",
   white: "#FFFFFF",
-  offWhite: "#F8FAFB",
-  grey50: "#F4F6F8",
-  grey100: "#E8ECF0",
-  grey200: "#CDD4DB",
-  grey300: "#9BA7B3",
-  grey400: "#6B7A88",
-  grey500: "#3D4F5F",
-  dark: "#0D1B24",
-  success: "#22C55E",
-  warning: "#EAB308",
+  offWhite: "#F7F8FC",
+  grey50: "#F4F6F9",
+  grey100: "#EBEEF2",
+  grey200: "#D1D5DB",
+  grey300: "#9CA3AF",
+  grey400: "#6B7280",
+  grey500: "#374151",
+  dark: "#111827",
+  success: "#10B981",
+  warning: "#F59E0B",
   danger: "#EF4444",
-  radius: "14px",
-  radiusSm: "10px",
-  radiusXl: "20px",
-  shadow: "0 4px 24px rgba(15,43,60,0.08)",
-  shadowLg: "0 12px 48px rgba(15,43,60,0.12)",
-  shadowXl: "0 20px 60px rgba(15,43,60,0.16)",
-  font: "'Outfit', 'Noto Sans Arabic', sans-serif",
-  fontAr: "'Noto Sans Arabic', 'Outfit', sans-serif",
+  radius: "16px",
+  radiusSm: "12px",
+  radiusXl: "24px",
+  shadow: "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)",
+  shadowLg: "0 4px 14px rgba(0,0,0,0.08)",
+  shadowXl: "0 10px 40px rgba(0,0,0,0.1)",
+  font: "'Poppins', 'Noto Sans Arabic', sans-serif",
+  fontAr: "'Noto Sans Arabic', 'Poppins', sans-serif",
 };
 
 // ─── Mock Data ───
@@ -109,9 +109,9 @@ const Btn = ({ children, onClick, variant = "primary", size = "md", style = {}, 
   const base = { border: "none", cursor: disabled ? "default" : "pointer", fontFamily: T.font, fontWeight: 600, borderRadius: T.radiusSm, transition: "all 0.2s", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, opacity: disabled ? 0.5 : 1, width: full ? "100%" : "auto" };
   const sizes = { sm: { padding: "8px 16px", fontSize: 13 }, md: { padding: "12px 24px", fontSize: 14 }, lg: { padding: "16px 32px", fontSize: 16 } };
   const variants = {
-    primary: { background: `linear-gradient(135deg, ${T.teal}, ${T.tealDark})`, color: T.white, boxShadow: `0 4px 16px ${T.teal}33` },
+    primary: { background: T.teal, color: T.white, boxShadow: "none" },
     secondary: { background: T.grey50, color: T.grey500, border: `1.5px solid ${T.grey200}` },
-    accent: { background: `linear-gradient(135deg, ${T.accent}, ${T.accentDark})`, color: T.white, boxShadow: `0 4px 16px ${T.accent}33` },
+    accent: { background: T.accent, color: T.white, boxShadow: "none" },
     ghost: { background: "transparent", color: T.teal },
     danger: { background: T.danger, color: T.white },
     outline: { background: "transparent", color: T.teal, border: `2px solid ${T.teal}` },
@@ -167,7 +167,7 @@ const StatCard = ({ icon, value, label, color = T.teal }) => (
 // ─── Global Styles ───
 const GlobalCSS = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: ${T.font}; background: ${T.offWhite}; color: ${T.dark}; -webkit-font-smoothing: antialiased; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -200,7 +200,7 @@ const Header = ({ page, setPage, user, setUser, setShowLogin, setShowChat }) => 
     <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
       {/* Logo */}
       <div onClick={() => setPage("home")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
-        <div style={{ width: 40, height: 40, borderRadius: 12, background: `linear-gradient(135deg, ${T.teal}, ${T.navy})`, display: "flex", alignItems: "center", justifyContent: "center", color: T.white, fontSize: 20, fontWeight: 800 }}>T</div>
+        <div style={{ width: 40, height: 40, borderRadius: 12, background: T.teal, display: "flex", alignItems: "center", justifyContent: "center", color: T.white, fontSize: 20, fontWeight: 800 }}>T</div>
         <div>
           <div style={{ fontSize: 18, fontWeight: 800, color: T.navy, lineHeight: 1.1, letterSpacing: -0.5 }}>Tahleeli<span style={{ color: T.teal }}>Online</span></div>
           <div style={{ fontSize: 9, color: T.grey300, fontWeight: 500, letterSpacing: 1.5, textTransform: "uppercase" }}>تحليلي اونلاين</div>
@@ -225,7 +225,7 @@ const Header = ({ page, setPage, user, setUser, setShowLogin, setShowChat }) => 
         <button onClick={() => setShowChat(true)} style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${T.grey200}`, background: T.white, cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }} title="AI Assistant">🤖</button>
         {user ? (
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 36, height: 36, borderRadius: "50%", background: `linear-gradient(135deg, ${T.teal}, ${T.accent})`, display: "flex", alignItems: "center", justifyContent: "center", color: T.white, fontSize: 14, fontWeight: 700 }}>{user.name[0]}</div>
+            <div style={{ width: 36, height: 36, borderRadius: "50%", background: T.teal, display: "flex", alignItems: "center", justifyContent: "center", color: T.white, fontSize: 14, fontWeight: 700 }}>{user.name[0]}</div>
             <button onClick={() => setUser(null)} style={{ border: "none", background: "none", color: T.grey400, fontSize: 12, cursor: "pointer", fontFamily: T.font }}>Logout</button>
           </div>
         ) : (
@@ -323,7 +323,7 @@ const HomePage = ({ setPage, setSearchQuery }) => {
 
                   <div style={{ marginTop: 12, padding: 12, background: T.tealLight, borderRadius: T.radiusSm, fontSize: 12, color: T.teal }}>💡 Our AI understands English, Arabic, and handwritten prescriptions. For best results, ensure the photo is clear and well-lit.</div>
 
-                  <button onClick={analyzePrescription} disabled={(!rxText.trim() && !rxImage) || rxLoading} style={{ width: "100%", marginTop: 16, padding: "16px 24px", border: "none", borderRadius: T.radiusSm, background: (!rxText.trim() && !rxImage) ? T.grey200 : `linear-gradient(135deg, ${T.teal}, ${T.tealDark})`, color: (!rxText.trim() && !rxImage) ? T.grey400 : T.white, fontSize: 16, fontWeight: 700, cursor: (!rxText.trim() && !rxImage) ? "default" : "pointer", fontFamily: T.font, transition: "all 0.2s" }}>
+                  <button onClick={analyzePrescription} disabled={(!rxText.trim() && !rxImage) || rxLoading} style={{ width: "100%", marginTop: 16, padding: "16px 24px", border: "none", borderRadius: 50, background: (!rxText.trim() && !rxImage) ? T.grey200 : T.teal, color: (!rxText.trim() && !rxImage) ? T.grey400 : T.white, fontSize: 16, fontWeight: 700, cursor: (!rxText.trim() && !rxImage) ? "default" : "pointer", fontFamily: T.font, transition: "all 0.2s" }}>
                     {rxLoading ? "🔍 AI is analyzing your prescription..." : "🤖 Analyze Prescription"}
                   </button>
                 </div>
@@ -352,7 +352,7 @@ const HomePage = ({ setPage, setSearchQuery }) => {
                   {rxResults.note && <div style={{ marginTop: 12, fontSize: 13, color: T.grey400, fontStyle: "italic" }}>💡 {rxResults.note}</div>}
                   <div style={{ marginTop: 20, display: "flex", gap: 8 }}>
                     <button onClick={() => { setRxResults(null); setRxText(""); setRxImage(null); setRxImageName(""); }} style={{ padding: "12px 20px", border: `1.5px solid ${T.grey200}`, borderRadius: T.radiusSm, background: T.white, cursor: "pointer", fontFamily: T.font, fontSize: 13, fontWeight: 600, color: T.grey500 }}>← Scan Again</button>
-                    <button onClick={() => { setRxModal(false); setPage("search"); }} style={{ flex: 1, padding: "14px 24px", border: "none", borderRadius: T.radiusSm, background: `linear-gradient(135deg, ${T.teal}, ${T.tealDark})`, color: T.white, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: T.font }}>📅 Book These Tests →</button>
+                    <button onClick={() => { setRxModal(false); setPage("search"); }} style={{ flex: 1, padding: "14px 24px", border: "none", borderRadius: 50, background: T.teal, color: T.white, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: T.font }}>📅 Book These Tests →</button>
                   </div>
                 </div>
               )}
@@ -361,32 +361,32 @@ const HomePage = ({ setPage, setSearchQuery }) => {
         </div>
       )}
       {/* Hero */}
-      <section style={{ background: `linear-gradient(160deg, ${T.navy} 0%, #143A4F 50%, ${T.tealDark} 100%)`, padding: "80px 24px 100px", position: "relative", overflow: "hidden" }}>
+      <section style={{ background: `linear-gradient(160deg, #0F2B3C 0%, #143A4F 50%, ${T.tealDark} 100%)`, padding: "80px 24px 100px", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: -100, right: -100, width: 400, height: 400, borderRadius: "50%", background: `radial-gradient(circle, ${T.teal}15, transparent)` }} />
         <div style={{ position: "absolute", bottom: -80, left: -80, width: 300, height: 300, borderRadius: "50%", background: `radial-gradient(circle, ${T.accent}10, transparent)` }} />
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative" }}>
-          <div className="stagger-1" style={{ display: "inline-block", padding: "6px 16px", borderRadius: 30, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", color: T.accent, fontSize: 13, fontWeight: 600, marginBottom: 24 }}>
+          <div className="stagger-1" style={{ display: "inline-block", padding: "6px 16px", borderRadius: 30, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)", color: T.teal, fontSize: 13, fontWeight: 600, marginBottom: 24 }}>
             🇪🇬 Egypt's #1 Medical Testing & Radiology Platform
           </div>
           <h1 className="stagger-2" style={{ fontSize: 52, fontWeight: 900, color: T.white, lineHeight: 1.1, marginBottom: 20, letterSpacing: -1.5 }}>
             Book Lab Tests & Scans<br />
-            <span style={{ background: `linear-gradient(90deg, ${T.teal}, ${T.accent})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>At the Best Price</span>
+            <span style={{ color: T.teal }}>At the Best Price</span>
           </h1>
           <p className="stagger-3" style={{ fontSize: 18, color: "rgba(255,255,255,0.65)", maxWidth: 560, margin: "0 auto 36px", lineHeight: 1.6 }}>
             Compare 600+ labs & imaging centers. Book instantly. Get digital results. Save up to 40%.
           </p>
           {/* Search Bar */}
-          <div className="stagger-4" style={{ display: "flex", maxWidth: 640, margin: "0 auto", background: T.white, borderRadius: 16, overflow: "hidden", boxShadow: T.shadowXl }}>
+          <div className="stagger-4" style={{ display: "flex", maxWidth: 640, margin: "0 auto", background: T.white, borderRadius: 50, overflow: "hidden", boxShadow: T.shadowXl }}>
             <div style={{ flex: 1, position: "relative" }}>
-              <span style={{ position: "absolute", left: 18, top: "50%", transform: "translateY(-50%)", fontSize: 20 }}>🔍</span>
-              <input value={heroSearch} onChange={e => setHeroSearch(e.target.value)} placeholder="Search tests, scans, or health packages..." style={{ width: "100%", padding: "20px 20px 20px 50px", border: "none", fontSize: 16, fontFamily: T.font, outline: "none" }} onKeyDown={e => { if (e.key === "Enter") { setSearchQuery(heroSearch); setPage("search"); } }} />
+              <span style={{ position: "absolute", left: 22, top: "50%", transform: "translateY(-50%)", fontSize: 18 }}>🔍</span>
+              <input value={heroSearch} onChange={e => setHeroSearch(e.target.value)} placeholder="Search tests, scans, or health packages..." style={{ width: "100%", padding: "20px 20px 20px 52px", border: "none", fontSize: 16, fontFamily: T.font, outline: "none" }} onKeyDown={e => { if (e.key === "Enter") { setSearchQuery(heroSearch); setPage("search"); } }} />
             </div>
-            <button onClick={() => { setSearchQuery(heroSearch); setPage("search"); }} style={{ padding: "0 32px", background: `linear-gradient(135deg, ${T.teal}, ${T.tealDark})`, border: "none", color: T.white, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: T.font }}>Search</button>
+            <button onClick={() => { setSearchQuery(heroSearch); setPage("search"); }} style={{ padding: "0 36px", background: T.teal, border: "none", color: T.white, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: T.font, borderRadius: "0 50px 50px 0", margin: -1 }}>Search</button>
           </div>
           {/* Quick Links */}
-          <div className="stagger-5" style={{ display: "flex", justifyContent: "center", gap: 16, marginTop: 24, flexWrap: "wrap" }}>
+          <div className="stagger-5" style={{ display: "flex", justifyContent: "center", gap: 12, marginTop: 24, flexWrap: "wrap" }}>
             {["CBC Blood Test", "MRI Scan", "Thyroid Panel", "Health Package"].map(q => (
-              <button key={q} onClick={() => { setSearchQuery(q); setPage("search"); }} style={{ padding: "8px 16px", borderRadius: 30, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", fontSize: 13, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s" }}>
+              <button key={q} onClick={() => { setSearchQuery(q); setPage("search"); }} style={{ padding: "8px 18px", borderRadius: 30, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", fontSize: 13, cursor: "pointer", fontFamily: T.font, transition: "all 0.2s" }}>
                 {q}
               </button>
             ))}
@@ -404,9 +404,8 @@ const HomePage = ({ setPage, setSearchQuery }) => {
             { num: "4.8★", label: "Average Rating", icon: "⭐" },
           ].map((s, i) => (
             <div key={i} style={{ textAlign: "center", padding: "8px 0" }}>
-              <div style={{ fontSize: 28, marginBottom: 4 }}>{s.icon}</div>
-              <div style={{ fontSize: 26, fontWeight: 800, color: T.navy }}>{s.num}</div>
-              <div style={{ fontSize: 12, color: T.grey400, fontWeight: 500 }}>{s.label}</div>
+              <div style={{ fontSize: 24, fontWeight: 800, color: T.navy }}>{s.num}</div>
+              <div style={{ fontSize: 12, color: T.grey400, fontWeight: 500, marginTop: 2 }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -440,7 +439,7 @@ const HomePage = ({ setPage, setSearchQuery }) => {
               { step: "03", icon: "📱", title: "Get Digital Results", desc: "Receive your results digitally through the app. Share with your doctor in one tap. Store forever in your health vault." },
             ].map((s, i) => (
               <div key={i} style={{ textAlign: "center", padding: 24 }}>
-                <div style={{ width: 80, height: 80, borderRadius: "50%", background: `linear-gradient(135deg, ${T.tealLight}, ${T.white})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36, margin: "0 auto 20px", border: `2px solid ${T.teal}20`, animation: `float 3s ${i * 0.5}s infinite ease-in-out` }}>{s.icon}</div>
+                <div style={{ width: 80, height: 80, borderRadius: "50%", background: T.tealLight, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36, margin: "0 auto 20px" }}>{s.icon}</div>
                 <div style={{ fontSize: 11, color: T.teal, fontWeight: 700, letterSpacing: 2, marginBottom: 8 }}>STEP {s.step}</div>
                 <div style={{ fontSize: 18, fontWeight: 700, color: T.navy, marginBottom: 8 }}>{s.title}</div>
                 <div style={{ fontSize: 14, color: T.grey400, lineHeight: 1.6 }}>{s.desc}</div>
@@ -482,15 +481,15 @@ const HomePage = ({ setPage, setSearchQuery }) => {
 
       {/* Prescription Upload CTA */}
       <section style={{ maxWidth: 1100, margin: "60px auto", padding: "0 24px" }}>
-        <div style={{ background: `linear-gradient(135deg, ${T.navy}, #1A4A60)`, borderRadius: T.radiusXl, padding: "48px 56px", display: "flex", alignItems: "center", gap: 48, position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", right: -60, top: -60, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${T.teal}20, transparent)` }} />
+        <div style={{ background: T.teal, borderRadius: T.radiusXl, padding: "48px 56px", display: "flex", alignItems: "center", gap: 48, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", right: -60, top: -60, width: 200, height: 200, borderRadius: "50%", background: "rgba(255,255,255,0.08)" }} />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 11, color: T.accent, fontWeight: 700, letterSpacing: 2, marginBottom: 12 }}>AI-POWERED</div>
+            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.7)", fontWeight: 600, letterSpacing: 2, marginBottom: 12 }}>AI-POWERED</div>
             <h3 style={{ fontSize: 28, fontWeight: 800, color: T.white, marginBottom: 12 }}>Upload Your Prescription</h3>
-            <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 24 }}>Take a photo of your doctor's prescription. Our AI reads it, identifies the required tests, and finds the best prices across all providers. It's that simple.</p>
-            <Btn variant="accent" size="lg" onClick={() => setRxModal(true)}>📸 Upload Prescription</Btn>
+            <p style={{ fontSize: 15, color: "rgba(255,255,255,0.75)", lineHeight: 1.6, marginBottom: 24 }}>Take a photo of your doctor's prescription. Our AI reads it, identifies the required tests, and finds the best prices across all providers. It's that simple.</p>
+            <button onClick={() => setRxModal(true)} style={{ padding: "14px 32px", border: "none", borderRadius: 50, background: T.white, color: T.teal, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: T.font }}>📸 Upload Prescription</button>
           </div>
-          <div style={{ width: 200, height: 200, borderRadius: T.radiusXl, background: `linear-gradient(135deg, ${T.teal}30, ${T.accent}20)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 80, flexShrink: 0 }}>📄</div>
+          <div style={{ width: 180, height: 180, borderRadius: T.radiusXl, background: "rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 80, flexShrink: 0 }}>📄</div>
         </div>
       </section>
 
@@ -794,10 +793,10 @@ const CorporatePage = () => {
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 24px" }}>
       {/* Hero */}
-      <div style={{ background: `linear-gradient(135deg, ${T.navy}, #1A4A60)`, borderRadius: T.radiusXl, padding: "56px 56px", marginBottom: 40, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", right: -40, bottom: -40, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${T.accent}20, transparent)` }} />
+      <div style={{ background: T.teal, borderRadius: T.radiusXl, padding: "56px 56px", marginBottom: 40, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", right: -40, bottom: -40, width: 200, height: 200, borderRadius: "50%", background: "rgba(255,255,255,0.08)" }} />
         <div style={{ maxWidth: 600 }}>
-          <div style={{ fontSize: 11, color: T.accent, fontWeight: 700, letterSpacing: 2, marginBottom: 12 }}>B2B CORPORATE WELLNESS</div>
+          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.7)", fontWeight: 700, letterSpacing: 2, marginBottom: 12 }}>B2B CORPORATE WELLNESS</div>
           <h1 style={{ fontSize: 36, fontWeight: 900, color: T.white, marginBottom: 16, lineHeight: 1.2 }}>Health Screening for Your Team, Made Simple</h1>
           <p style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", lineHeight: 1.6 }}>Pre-employment testing, annual health check-ups, and wellness packages — all managed through one digital platform with bulk booking, invoicing, and real-time reporting.</p>
         </div>
@@ -984,7 +983,7 @@ const DashboardPage = () => {
                   return (
                     <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
                       <span style={{ fontSize: 10, fontWeight: 600, color: T.grey400 }}>{(d.value / 1000).toFixed(0)}K</span>
-                      <div style={{ width: "100%", height: `${pct}%`, borderRadius: 8, background: `linear-gradient(180deg, ${T.teal}, ${T.tealDark})`, minHeight: 20, transition: "height 0.5s", animation: `fadeUp 0.5s ${i * 0.1}s both` }} />
+                      <div style={{ width: "100%", height: `${pct}%`, borderRadius: 8, background: T.teal, minHeight: 20, transition: "height 0.5s", animation: `fadeUp 0.5s ${i * 0.1}s both` }} />
                       <span style={{ fontSize: 11, color: T.grey300 }}>{d.month}</span>
                     </div>
                   );
@@ -1130,7 +1129,7 @@ const ChatBot = ({ open, onClose }) => {
   if (!open) return null;
   return (
     <div style={{ position: "fixed", bottom: 24, right: 24, width: 380, height: 520, background: T.white, borderRadius: T.radiusXl, boxShadow: T.shadowXl, display: "flex", flexDirection: "column", zIndex: 999, animation: "fadeUp 0.3s", overflow: "hidden" }}>
-      <div style={{ background: `linear-gradient(135deg, ${T.navy}, ${T.tealDark})`, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div style={{ background: T.teal, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>🤖</div>
           <div>
@@ -1241,7 +1240,7 @@ export default function App() {
 
       {/* Floating Chat Button */}
       {!showChat && (
-        <button onClick={() => setShowChat(true)} style={{ position: "fixed", bottom: 24, right: 24, width: 60, height: 60, borderRadius: "50%", background: `linear-gradient(135deg, ${T.teal}, ${T.navy})`, border: "none", color: T.white, fontSize: 28, cursor: "pointer", boxShadow: T.shadowLg, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 998, animation: "float 3s infinite" }}>
+        <button onClick={() => setShowChat(true)} style={{ position: "fixed", bottom: 24, right: 24, width: 60, height: 60, borderRadius: "50%", background: T.teal, border: "none", color: T.white, fontSize: 28, cursor: "pointer", boxShadow: "0 4px 20px rgba(14,173,105,0.3)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 998, transition: "transform 0.2s" }}>
           💬
         </button>
       )}
